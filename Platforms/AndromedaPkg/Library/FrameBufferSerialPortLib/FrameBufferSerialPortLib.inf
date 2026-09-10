@@ -15,6 +15,7 @@
   AndromedaPkg/AndromedaPkg.dec
 
 [LibraryClasses]
+  BaseMemoryLib
   ArmLib
   PcdLib
   IoLib

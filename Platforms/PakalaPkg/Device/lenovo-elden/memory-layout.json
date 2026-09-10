@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "status": "V1 implementation baseline; not boot-tested",
+  "device": "lenovo-elden",
+  "soc": "Sm8750",
+  "binary_source": "UEFIFirmwareBackup/lenovo-y700g4/BOOT.MXF.2.5.1-00240.1-PAKALA-1",
+  "uefi_source_sha256": "5a91d4df5d4dcf2c049d6f64d217f280e83f6dcb369ecea81911f61ee73395d1",
+  "memory_source": "TB322_ZUXOS_1.5.10.259_Tool/image/xbl_config.elf",
+  "memory_source_sha256": "b36b854e0d6d69ab4e74cec24829caa3d4353495903026c99c5a1dbea35ab65c",
+  "source_versions_match": false,
+  "kernel_compressed": true,
+  "original_dxe_heap": {"base": "0xBD930000", "size": "0x1A6D0000"},
+  "dxe_container": {"base": "0xBD930000", "size": "0x1A2D0000"},
+  "dxe_allocatable": {"base": "0xBD930000", "size": "0x1A290000"},
+  "uefi_stack": {"base": "0xD7BC0000", "size": "0x00040000"},
+  "uefi_fd": {"base": "0xD7C00000", "size": "0x00400000"},
+  "cpu_vectors": {"base": "0xA7600000", "size": "0x00001000"},
+  "kernel_window": {"base": "0xA8000000", "size": "0x10000000"},
+  "display_reserved": {"base": "0xFC800000", "size": "0x02B00000"},
+  "unverified": [
+    "Runtime ownership and write protection of the stock heap tail",
+    "Compatibility between backup drivers and newer XBL configuration",
+    "Actual entry CPU, exception level and secondary-core state",
+    "Final Android image headers and DTB/ramdisk/bootconfig boundaries"
+  ]
+}

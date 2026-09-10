@@ -1,0 +1,25 @@
+[Defines]
+  INF_VERSION = 0x00010005
+  BASE_NAME = EldenGop
+  FILE_GUID = 87503222-9D17-4503-AB62-DFC783604301
+  MODULE_TYPE = DXE_DRIVER
+  ENTRY_POINT = EldenGopInitialize
+[Sources]
+  EldenGop.c
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  FrameBufferBltLib
+  CacheMaintenanceLib
+  DebugLib
+[Protocols]
+  gEfiDevicePathProtocolGuid
+  gEfiGraphicsOutputProtocolGuid
+  gEfiCpuArchProtocolGuid
+[Depex]
+  gEfiCpuArchProtocolGuid

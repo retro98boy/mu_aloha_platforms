@@ -1,0 +1,40 @@
+[Defines]
+  INF_VERSION = 0x00010005
+  BASE_NAME = EldenBootManager
+  FILE_GUID = 87503222-9D17-4503-AB62-DFC783604303
+  MODULE_TYPE = DXE_DRIVER
+  LIBRARY_CLASS = DeviceBootManagerLib|DXE_DRIVER
+[Sources]
+  EldenBootManager.c
+  EldenBootChoice.c
+  EldenConnect.c
+  EldenBootSlot.c
+[Packages]
+  PakalaPkg/PakalaPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  MsCorePkg/MsCorePkg.dec
+  PcBdsPkg/PcBdsPkg.dec
+  MsGraphicsPkg/MsGraphicsPkg.dec
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  UefiBootManagerLib
+  DevicePathLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  UefiLib
+  PrintLib
+  MsBootOptionsLib
+  DebugLib
+  BaseLib
+  DxeServicesTableLib
+  PcdLib
+[Pcd]
+  gMsGraphicsPkgTokenSpaceGuid.PcdMsGopOverrideProtocolGuid
+[Protocols]
+  gEldenUfsReadyProtocolGuid
+  gEfiBlockIoProtocolGuid
+  gEfiSimpleFileSystemProtocolGuid
+  gEfiSimpleTextInProtocolGuid
+  gEfiGraphicsOutputProtocolGuid

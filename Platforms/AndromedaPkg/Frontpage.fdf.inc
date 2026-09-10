@@ -24,7 +24,11 @@
   INF MsWheaPkg/MsWheaReport/Dxe/MsWheaReportDxe.inf
   INF OemPkg/BootMenu/BootMenu.inf
   INF PcBdsPkg/MsBootPolicy/MsBootPolicy.inf
+!if "$(TARGET_DEVICE)" == "lenovo-elden"
+  INF PakalaPkg/Device/lenovo-elden/EldenFrontPage/FrontPage.inf
+!else
   INF AndromedaPkg/FrontPage/FrontPage.inf
+!endif
 
   FILE FREEFORM = PCD(gOemPkgTokenSpaceGuid.PcdFrontPageLogoFile) {
     SECTION RAW = Epsilon/BOOT.XF.3.0-00527-SM8150LZB-1/RawFiles/Logo

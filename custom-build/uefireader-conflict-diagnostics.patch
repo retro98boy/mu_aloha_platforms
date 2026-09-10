@@ -1,0 +1,56 @@
+diff --git a/UEFIReader/UEFI.cs b/UEFIReader/UEFI.cs
+--- a/UEFIReader/UEFI.cs
++++ b/UEFIReader/UEFI.cs
+@@ -56,6 +56,29 @@
+             uint VolumeHeaderOffset = Offset == null ? throw new BadImageFormatException() : (uint)Offset - 0x28;
+ 
+             EFIs.AddRange(HandleVolumeImage(UefiBinary, VolumeHeaderOffset));
++
++            // Deduplicate whole FFS modules, not just their executable sections.
++            // Preserve first-seen order for extraction and generated load lists.
++            Dictionary<Guid, EFI> uniqueModules = [];
++            foreach (EFI module in EFIs)
++            {
++                if (uniqueModules.TryGetValue(module.Guid, out EFI? previous))
++                {
++                    bool identical = previous.Type == module.Type &&
++                        previous.SectionElements!.Length == module.SectionElements!.Length &&
++                        previous.SectionElements.Zip(module.SectionElements).All(pair =>
++                            pair.First.Name == pair.Second.Name && pair.First.Type == pair.Second.Type &&
++                            ((pair.First.DecompressedImage == null && pair.Second.DecompressedImage == null) ||
++                             (pair.First.DecompressedImage != null && pair.Second.DecompressedImage != null &&
++                              pair.First.DecompressedImage.SequenceEqual(pair.Second.DecompressedImage))));
++                    if (!identical)
++                        throw new IOException($"Conflicting FFS modules with GUID {module.Guid}: metadata or section bytes differ. Extraction stopped before writing files.");
++                    Console.Error.WriteLine($"WARNING: Reusing identical FFS module {module.Guid} ({module.Type}); all section metadata and bytes match.");
++                    continue;
++                }
++                uniqueModules.Add(module.Guid, module);
++            }
++            EFIs = uniqueModules.Values.ToList();
+ 
+             var buildIds = TryGetBuildPath(UefiBinary);
+             if (buildIds.LongLength > 0)
+@@ -215,7 +215,21 @@
+ 
+                         if (File.Exists(Path.Combine(combinedPath, outputFileName)))
+                         {
+-                            throw new Exception("File Conflict Detected");
++                            string conflictPath = Path.GetFullPath(Path.Combine(combinedPath, outputFileName));
++                            byte[] existing = File.ReadAllBytes(conflictPath);
++                            byte[] incoming = item.DecompressedImage!;
++                            throw new IOException(
++                                $"File Conflict Detected\n" +
++                                $"  Output path: {conflictPath}\n" +
++                                $"  Incoming FFS GUID: {element.Guid}\n" +
++                                $"  Module: {moduleName}; base name: {baseName}; FFS type: {element.Type}\n" +
++                                $"  Section type: {item.Type}; index (zero-based): {Array.IndexOf(element.SectionElements, item)}\n" +
++                                $"  Module section types: {string.Join(", ", element.SectionElements.Select(s => s.Type))}\n" +
++                                $"  Existing bytes: {existing.Length}; incoming bytes: {incoming.Length}\n" +
++                                $"  Identical bytes: {existing.SequenceEqual(incoming)}\n" +
++                                $"  Existing SHA256: {Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(existing))}\n" +
++                                $"  Incoming SHA256: {Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(incoming))}\n" +
++                                $"No file was overwritten. Retry with a fresh output directory to rule out stale files.");
+                         }
+                         File.WriteAllBytes(Path.Combine(combinedPath, outputFileName), item.DecompressedImage);
+                     }

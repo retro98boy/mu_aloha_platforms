@@ -1,0 +1,21 @@
+[Defines]
+  INF_VERSION = 0x00010005
+  BASE_NAME = EldenKeys
+  FILE_GUID = 87503222-9D17-4503-AB62-DFC783604302
+  MODULE_TYPE = DXE_DRIVER
+  ENTRY_POINT = EldenKeysEntry
+[Sources]
+  EldenKeys.c
+[Packages]
+  MdePkg/MdePkg.dec
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+[Protocols]
+  gEfiDevicePathProtocolGuid
+  gEfiSimpleTextInProtocolGuid
+  gEfiSimpleTextInputExProtocolGuid
+[Depex]
+  TRUE

@@ -1,0 +1,64 @@
+[Defines]
+  INF_VERSION = 0x00010005
+  BASE_NAME = EldenStorageDxe
+  FILE_GUID = 87503222-9D17-4503-AB62-DFC783604304
+  MODULE_TYPE = DXE_DRIVER
+  ENTRY_POINT = EldenStorageEntry
+[Sources]
+  EldenStorageDxe.c
+[Packages]
+  MdePkg/MdePkg.dec
+  AndromedaPkg/AndromedaPkg.dec
+  PakalaPkg/PakalaPkg.dec
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  BaseLib
+  BaseMemoryLib
+  DevicePathLib
+  MemoryAllocationLib
+  CacheMaintenanceLib
+  UefiLib
+  DebugLib
+[Protocols]
+  gEldenUfsReadyProtocolGuid
+  gEfiFirmwareVolume2ProtocolGuid
+  gEfiLoadedImageProtocolGuid
+  gEfiSecurityArchProtocolGuid
+  gEfiCpuArchProtocolGuid
+  gEfiMetronomeArchProtocolGuid
+  gEfiTimerArchProtocolGuid
+  gEfiBdsArchProtocolGuid
+  gEfiWatchdogTimerArchProtocolGuid
+  gEfiRuntimeArchProtocolGuid
+  gEfiVariableArchProtocolGuid
+  gEfiVariableWriteArchProtocolGuid
+  gEfiCapsuleArchProtocolGuid
+  gEfiMonotonicCounterArchProtocolGuid
+  gEfiResetArchProtocolGuid
+  gEfiRealTimeClockArchProtocolGuid
+  gEfiClockProtocolGuid
+  gEldenEnvServicesProtocolGuid
+  gEldenDalSysProtocolGuid
+  gEldenNpaProtocolGuid
+  gEldenHwioProtocolGuid
+[Depex]
+  gEfiSecurityArchProtocolGuid AND
+  gEfiCpuArchProtocolGuid AND
+  gEfiMetronomeArchProtocolGuid AND
+  gEfiTimerArchProtocolGuid AND
+  gEfiBdsArchProtocolGuid AND
+  gEfiWatchdogTimerArchProtocolGuid AND
+  gEfiRuntimeArchProtocolGuid AND
+  gEfiVariableArchProtocolGuid AND
+  gEfiVariableWriteArchProtocolGuid AND
+  gEfiCapsuleArchProtocolGuid AND
+  gEfiMonotonicCounterArchProtocolGuid AND
+  gEfiResetArchProtocolGuid AND
+  gEfiRealTimeClockArchProtocolGuid AND
+  gEfiFirmwareVolume2ProtocolGuid AND
+  gEfiClockProtocolGuid AND
+  gEldenEnvServicesProtocolGuid AND
+  gEldenDalSysProtocolGuid AND
+  gEldenNpaProtocolGuid AND
+  gEldenHwioProtocolGuid

@@ -95,7 +95,11 @@
   # Device specific actions in support of PlatformBootManagerLib.
   # Sort of a wrapper for MsPlatformDevicesLib, which needs to be written for each platform.
   #
+!if "$(TARGET_DEVICE)" == "lenovo-elden"
+  DeviceBootManagerLib|PakalaPkg/Device/lenovo-elden/EldenBootManager/EldenBootManager.inf
+!else
   DeviceBootManagerLib|AndromedaPkg/Library/DeviceBootManagerLib/DeviceBootManagerLib.inf
+!endif
   MsPlatformDevicesLib|AndromedaPkg/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
   #
   # LIbrary to display the On screen notifications for the platform
@@ -191,7 +195,14 @@
   #
   # Application that presents and manages FrontPage.
   #
+!if "$(TARGET_DEVICE)" == "lenovo-elden"
+  PakalaPkg/Device/lenovo-elden/EldenFrontPage/FrontPage.inf {
+    <BuildOptions>
+      GCC:*_*_AARCH64_CC_FLAGS = -DELDEN_FRONTPAGE_TRIAL
+  }
+!else
   AndromedaPkg/FrontPage/FrontPage.inf
+!endif
   # Surface Boot Manager (Menu) application
   #
   # Application that presents & manages the Boot Menu Setup on Front Page.

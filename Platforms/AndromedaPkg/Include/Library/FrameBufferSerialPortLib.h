@@ -36,6 +36,7 @@ enum FbConMsgType {
 };
 
 void ResetFb(void);
+VOID EFIAPI EldenResetScreenLog(VOID);
 
 UINTN
 EFIAPI
