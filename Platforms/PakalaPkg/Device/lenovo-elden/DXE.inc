@@ -5,6 +5,7 @@ INF $(PACKAGE_NAME)/Device/$(TARGET_DEVICE)/Drivers/UfsPlatformDxe/UfsPlatformDx
 INF MdeModulePkg/Bus/Pci/UfsPciHcDxe/UfsPciHcDxe.inf
 INF MdeModulePkg/Bus/Ufs/UfsPassThruDxe/UfsPassThruDxe.inf
 INF $(PACKAGE_NAME)/Device/$(TARGET_DEVICE)/Drivers/SdMmcPlatformDxe/SdMmcPlatformDxe.inf
+INF $(PACKAGE_NAME)/Device/$(TARGET_DEVICE)/Applications/EfiBootMenu/EfiBootMenu.inf
 INF MdeModulePkg/Bus/Pci/NonDiscoverablePciDeviceDxe/NonDiscoverablePciDeviceDxe.inf
 INF MdeModulePkg/Bus/Pci/SdMmcPciHcDxe/SdMmcPciHcDxe.inf
 INF MdeModulePkg/Bus/Sd/SdDxe/SdDxe.inf

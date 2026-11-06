@@ -1,0 +1,20 @@
+[Defines]
+  INF_VERSION = 0x00010005
+  BASE_NAME = PlatformBootPickerLib
+  FILE_GUID = 5F1668F8-AB10-4C5C-A4E5-093E5448484F
+  MODULE_TYPE = DXE_DRIVER
+  LIBRARY_CLASS = PlatformBootPickerLib|DXE_DRIVER
+[Sources]
+  PlatformBootPickerLib.c
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AndromedaPkg/AndromedaPkg.dec
+[LibraryClasses]
+  DevicePathLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiBootManagerLib
+  UefiLib
+[Protocols]
+  gEfiLoadedImageProtocolGuid

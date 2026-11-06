@@ -2,9 +2,11 @@
 MdeModulePkg/Universal/BdsDxe/BdsDxe.inf {
   <LibraryClasses>
     MsPlatformDevicesLib|$(PACKAGE_NAME)/Device/$(TARGET_DEVICE)/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
+    PlatformBootPickerLib|$(PACKAGE_NAME)/Device/$(TARGET_DEVICE)/Library/PlatformBootPickerLib/PlatformBootPickerLib.inf
     NULL|AndromedaPkg/Library/KernelErrataPatcherLib/KernelErrataPatcherLib.inf
 }
 $(PACKAGE_NAME)/Device/$(TARGET_DEVICE)/Drivers/SdMmcPlatformDxe/SdMmcPlatformDxe.inf
+$(PACKAGE_NAME)/Device/$(TARGET_DEVICE)/Applications/EfiBootMenu/EfiBootMenu.inf
 MdeModulePkg/Bus/Pci/NonDiscoverablePciDeviceDxe/NonDiscoverablePciDeviceDxe.inf {
   <LibraryClasses>
     # SDCC2 and UFS use inherited identity DMA mappings, not vendor private domains.

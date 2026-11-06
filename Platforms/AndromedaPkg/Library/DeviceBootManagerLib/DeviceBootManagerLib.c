@@ -38,6 +38,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #include <Library/PcdLib.h>
 #include <Library/PrintLib.h>
 #include <Library/PowerServicesLib.h>
+#include <Library/PlatformBootPickerLib.h>
 #include <Library/Tcg2PhysicalPresenceLib.h>
 #include <Library/ThermalServicesLib.h>
 #include <Library/UefiBootServicesTableLib.h>
@@ -926,7 +927,7 @@ DeviceBootManagerPriorityBoot (
   MsBootPolicyLibClearBootRequests ();
 
   // There are six cases:
-  //   1. Nothing pressed.             return EFI_NOT_FOUND
+  //   1. Nothing pressed.             optional picker, otherwise EFI_NOT_FOUND
   //   2. FrontPageBoot                load FrontPage
   //   3. BootloaderMenuBoot           load Bootloader menu
   //   4. UFPBoot                      load UFP
@@ -956,7 +957,8 @@ DeviceBootManagerPriorityBoot (
     Status = MsBootOptionsLibGetBootManagerMenu (BootOption, "VOL+");
     SetRebootReason (OEM_REBOOT_TO_SETUP_KEY);
   } else {
-    Status = EFI_NOT_FOUND;
+    // The optional picker must not override standard startup key requests.
+    Status = PlatformBootPickerGetBootOption (BootOption);
   }
 
   return Status;

@@ -96,6 +96,7 @@
   # Sort of a wrapper for MsPlatformDevicesLib, which needs to be written for each platform.
   #
   DeviceBootManagerLib|AndromedaPkg/Library/DeviceBootManagerLib/DeviceBootManagerLib.inf
+  PlatformBootPickerLib|AndromedaPkg/Library/PlatformBootPickerLibNull/PlatformBootPickerLibNull.inf
   MsPlatformDevicesLib|AndromedaPkg/Library/MsPlatformDevicesLib/MsPlatformDevicesLib.inf
   #
   # LIbrary to display the On screen notifications for the platform
