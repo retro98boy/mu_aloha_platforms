@@ -1,0 +1,6 @@
+**
+!custcom-build/
+!custcom-build/Dockerfile
+!pip-requirements.txt
+!scripts/
+!scripts/install_avbtool.sh
